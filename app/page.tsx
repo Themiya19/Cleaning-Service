@@ -85,10 +85,10 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-left">
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Professional <span className="text-blue-600">Cleaning Services</span> in Melbourne
+                Professional <span className="text-blue-600">Cleaning Services</span> in Tasmania
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Experience the difference with Melbourne's most trusted cleaning professionals. 
+                Experience the difference with Tasmania's most trusted cleaning professionals. 
                 Quality guaranteed, every time.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -154,7 +154,7 @@ export default function HomePage() {
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               From carpet cleaning to office maintenance, we provide comprehensive cleaning solutions 
-              for homes and businesses across Melbourne.
+              for homes and businesses across Tasmania.
             </p>
           </div>
           
