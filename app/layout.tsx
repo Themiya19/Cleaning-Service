@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingCallButton from '@/components/FloatingCallButton';
 import CookieConsent from '@/components/CookieConsent';
+import PageTransition from '@/components/animations/PageTransition';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,10 +22,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} overflow-x-hidden`}>
         <Header />
-        <main className="min-h-screen">
-          {children}
+        <main className="min-h-screen relative">
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
         <Footer />
         <FloatingCallButton />

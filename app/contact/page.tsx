@@ -216,8 +216,8 @@ export default function ContactPage() {
                     <MapPin className="w-6 h-6 text-blue-600 mt-1" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Service Area</h3>
-                      <p className="text-gray-700">Melbourne & Surrounding Suburbs</p>
-                      <p className="text-sm text-gray-600">Victoria, Australia</p>
+                      <p className="text-gray-700">Tasmania Statewide</p>
+                      <p className="text-sm text-gray-600">Tasmania, Australia</p>
                     </div>
                   </div>
 
@@ -284,13 +284,13 @@ export default function ContactPage() {
               Our Service Area
             </h2>
             <p className="text-xl text-gray-600">
-              We proudly serve Melbourne and surrounding suburbs
+              We proudly serve Tasmania statewide
             </p>
           </div>
           
           <div className="bg-white p-4 rounded-lg shadow-lg">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d151978.64515176353!2d144.8559382!3d-37.8142176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2s!4v1650000000000!5m2!1sen!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d408733.4210777627!2d146.3124065!3d-42.0409762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa6db8af58bb8e5d%3A0x2d3e3e0d0b4f4c1a!2sTasmania%2C%20Australia!5e0!3m2!1sen!2s!4v1650000000000!5m2!1sen!2s"
               width="100%"
               height="400"
               style={{ border: 0 }}

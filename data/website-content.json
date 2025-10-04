@@ -1,0 +1,230 @@
+{
+  "company": {
+    "name": "Sparkle Clean 123",
+    "tagline": "Professional Services",
+    "phone": "1300123456",
+    "email": "info@sparkleclean.com.au",
+    "address": "Hobart, TAS, Australia"
+  },
+  "hero": {
+    "title": "Professional Cleaning Services in Tasmania",
+    "subtitle": "Experience the difference with Tasmania's most trusted cleaning professionals. Quality guaranteed, every time.",
+    "primaryCTA": "Get Free Quote",
+    "secondaryCTA": "Call Now",
+    "stats": {
+      "customers": "500+",
+      "rating": "5.0",
+      "experience": "10+",
+      "jobsCompleted": "2000+",
+      "satisfactionRate": "100%"
+    }
+  },
+  "about": {
+    "title": "About Sparkle Clean",
+    "subtitle": "For over a decade, we've been Tasmania's trusted cleaning professionals, delivering exceptional service to homes and businesses across the state.",
+    "mission": "To provide reliable, professional cleaning services that exceed expectations while maintaining the highest standards of quality and customer care.",
+    "story": {
+      "founded": "2014",
+      "founder": "Sarah Mitchell",
+      "description": "Sparkle Clean was founded in 2014 with a simple vision: to provide Tasmania residents and businesses with reliable, high-quality cleaning services they can trust. What started as a small family business has grown into one of Tasmania's most respected cleaning companies, serving hundreds of satisfied customers across the state."
+    },
+    "values": [
+      {
+        "title": "Quality First",
+        "description": "We never compromise on quality. Every job is completed to the highest standard with attention to detail."
+      },
+      {
+        "title": "Professional Team",
+        "description": "Our trained and experienced professionals are background-checked and fully insured for your peace of mind."
+      },
+      {
+        "title": "Reliability",
+        "description": "Count on us to arrive on time, every time. We respect your schedule and deliver consistent results."
+      },
+      {
+        "title": "Customer Care",
+        "description": "Your satisfaction is our priority. We go the extra mile to ensure you're completely happy with our service."
+      }
+    ],
+    "whyChooseUs": [
+      "Over 10 years of experience in professional cleaning",
+      "Fully licensed, bonded, and insured",
+      "Eco-friendly cleaning products available",
+      "Flexible scheduling including weekends",
+      "100% satisfaction guarantee",
+      "Competitive pricing with no hidden fees",
+      "Trained and background-checked staff",
+      "State-of-the-art cleaning equipment"
+    ]
+  },
+  "services": [
+    {
+      "id": "carpet-cleaning",
+      "title": "Carpet Cleaning",
+      "description": "Professional steam cleaning for carpets, rugs, and upholstery. We remove deep stains, odors, and allergens to restore your carpets to like-new condition.",
+      "shortDescription": "Deep steam cleaning for carpets and rugs",
+      "price": "From $80",
+      "duration": "1-3 hours",
+      "features": [
+        "Deep steam cleaning",
+        "Stain removal",
+        "Odor elimination",
+        "Fast drying",
+        "Eco-friendly products"
+      ],
+      "image": "https://images.pexels.com/photos/6195129/pexels-photo-6195129.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": "end-of-lease",
+      "title": "End of Lease Cleaning",
+      "description": "Comprehensive bond cleaning service to help you get your full deposit back. We follow real estate inspection checklists to ensure nothing is missed.",
+      "shortDescription": "Complete bond cleaning guarantee",
+      "price": "From $200",
+      "duration": "3-6 hours",
+      "features": [
+        "Bond back guarantee",
+        "Complete property clean",
+        "Kitchen deep clean",
+        "Bathroom sanitization",
+        "Window cleaning"
+      ],
+      "image": "https://images.pexels.com/photos/4239146/pexels-photo-4239146.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": "office-cleaning",
+      "title": "Office Cleaning",
+      "description": "Regular commercial cleaning services for offices, retail spaces, and medical facilities. Maintain a professional, healthy work environment.",
+      "shortDescription": "Regular commercial cleaning services",
+      "price": "From $50/visit",
+      "duration": "Varies",
+      "features": [
+        "Daily, weekly, or monthly service",
+        "Desk and surface cleaning",
+        "Restroom sanitization",
+        "Trash removal",
+        "Floor care"
+      ],
+      "image": "https://images.pexels.com/photos/7089020/pexels-photo-7089020.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": "deep-cleaning",
+      "title": "Deep Cleaning",
+      "description": "Intensive one-time cleaning service that covers every corner of your home. Perfect for spring cleaning or before special events.",
+      "shortDescription": "Comprehensive one-time deep clean",
+      "price": "From $150",
+      "duration": "4-8 hours",
+      "features": [
+        "Complete home cleaning",
+        "Inside appliances",
+        "Light fixtures",
+        "Baseboards & trim",
+        "Window sills"
+      ],
+      "image": "https://images.pexels.com/photos/4239037/pexels-photo-4239037.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": "window-cleaning",
+      "title": "Window Cleaning",
+      "description": "Crystal clear windows inside and out. We clean frames, sills, and screens for streak-free results that let the light shine through.",
+      "shortDescription": "Crystal clear windows inside and out",
+      "price": "From $60",
+      "duration": "1-2 hours",
+      "features": [
+        "Inside & outside cleaning",
+        "Frame & sill cleaning",
+        "Screen cleaning",
+        "Streak-free finish",
+        "High-rise available"
+      ],
+      "image": "https://images.pexels.com/photos/5591831/pexels-photo-5591831.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "id": "regular-house-cleaning",
+      "title": "Regular House Cleaning",
+      "description": "Ongoing residential cleaning service to keep your home consistently clean. Choose weekly, bi-weekly, or monthly service.",
+      "shortDescription": "Ongoing residential cleaning service",
+      "price": "From $100/visit",
+      "duration": "2-4 hours",
+      "features": [
+        "Flexible scheduling",
+        "Same cleaner each visit",
+        "Custom cleaning plan",
+        "Eco-friendly options",
+        "Satisfaction guarantee"
+      ],
+      "image": "https://images.pexels.com/photos/4239031/pexels-photo-4239031.jpeg?auto=compress&cs=tinysrgb&w=600"
+    }
+  ],
+  "addOns": [
+    {
+      "name": "Inside Oven Cleaning",
+      "price": "$25"
+    },
+    {
+      "name": "Inside Fridge Cleaning",
+      "price": "$20"
+    },
+    {
+      "name": "Garage Cleaning",
+      "price": "$40"
+    },
+    {
+      "name": "Balcony/Patio Cleaning",
+      "price": "$30"
+    },
+    {
+      "name": "Pressure Washing",
+      "price": "$80"
+    },
+    {
+      "name": "Garden Maintenance",
+      "price": "$60/hour"
+    }
+  ],
+  "features": [
+    {
+      "title": "Fully Insured",
+      "description": "Comprehensive insurance coverage for your peace of mind"
+    },
+    {
+      "title": "Trained Professionals",
+      "description": "Experienced and background-checked cleaning staff"
+    },
+    {
+      "title": "24/7 Availability",
+      "description": "Flexible scheduling to fit your busy lifestyle"
+    },
+    {
+      "title": "Quality Guarantee",
+      "description": "100% satisfaction guarantee on all our services"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Sarah Johnson",
+      "rating": 5,
+      "text": "Exceptional service! They cleaned our carpets and they look brand new. Highly recommend.",
+      "location": "Hobart, TAS"
+    },
+    {
+      "name": "Michael Chen",
+      "rating": 5,
+      "text": "Professional team, arrived on time, and did an amazing job with our end of lease clean.",
+      "location": "Launceston, TAS"
+    },
+    {
+      "name": "Emma Wilson",
+      "rating": 5,
+      "text": "Regular office cleaning service is fantastic. Our workspace has never been cleaner.",
+      "location": "Devonport, TAS"
+    }
+  ],
+  "seo": {
+    "homeTitle": "Professional Cleaning Services Tasmania - Sparkle Clean",
+    "homeDescription": "Tasmania's trusted cleaning professionals. Carpet cleaning, end of lease cleaning, office cleaning & more. Quality guaranteed. Get your free quote today!",
+    "aboutTitle": "About Us - Sparkle Clean Professional Cleaning Services",
+    "aboutDescription": "Learn about Sparkle Clean, Tasmania's trusted cleaning professionals. Our story, values, and commitment to quality cleaning services.",
+    "servicesTitle": "Professional Cleaning Services Tasmania - Sparkle Clean",
+    "servicesDescription": "Complete range of professional cleaning services in Tasmania. Carpet cleaning, end of lease cleaning, office cleaning, and more. Get your free quote today."
+  }
+}

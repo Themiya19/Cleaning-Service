@@ -3,65 +3,65 @@ import Link from 'next/link';
 import { MapPin, Clock, Phone, CheckCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Service Areas Melbourne - Professional Cleaning Services | Sparkle Clean',
-  description: 'Professional cleaning services across Melbourne suburbs. We service Carlton, Richmond, South Yarra, Brighton, St Kilda, and more. Check if we service your area.',
+  title: 'Service Areas Tasmania - Professional Cleaning Services | Sparkle Clean',
+  description: 'Professional cleaning services across Tasmania. We service Hobart, Launceston, Devonport, Burnie, and more. Check if we service your area.',
 };
 
 export default function AreasPage() {
   const serviceAreas = [
     {
-      region: 'Inner Melbourne',
+      region: 'Greater Hobart',
       suburbs: [
-        'Carlton', 'Carlton North', 'Fitzroy', 'Fitzroy North', 'Collingwood',
-        'Richmond', 'South Yarra', 'Prahran', 'Windsor', 'St Kilda',
-        'Albert Park', 'Port Melbourne', 'South Melbourne', 'Melbourne CBD'
+        'Hobart CBD', 'Battery Point', 'South Hobart', 'Mount Stuart', 'Sandy Bay',
+        'Taroona', 'Kingston', 'Blackmans Bay', 'Howrah', 'Bellerive',
+        'Rosny Park', 'Montrose', 'Glenorchy', 'New Town'
       ],
       travelTime: '15-30 mins',
       popular: true,
     },
     {
-      region: 'Eastern Suburbs',
+      region: 'Launceston Area',
       suburbs: [
-        'Toorak', 'Armadale', 'Malvern', 'Caulfield', 'Glen Iris',
-        'Camberwell', 'Hawthorn', 'Kew', 'Richmond', 'Burnley'
+        'Launceston CBD', 'East Launceston', 'West Launceston', 'South Launceston', 'Newstead',
+        'Invermay', 'Norwood', 'St Leonards', 'Prospect', 'Summerhill'
       ],
-      ravelTime: '20-35 mins',
+      travelTime: '15-25 mins',
       popular: true,
     },
     {
-      region: 'Southern Suburbs',
+      region: 'North West Coast',
       suburbs: [
-        'Brighton', 'Hampton', 'Sandringham', 'Bentleigh', 'McKinnon',
-        'Ormond', 'Elsternwick', 'Caulfield South', 'Carnegie', 'Murrumbeena'
+        'Devonport', 'Burnie', 'Wynyard', 'Somerset', 'Ulverstone',
+        'Penguin', 'Turners Beach', 'Port Sorell', 'Latrobe', 'Sheffield'
       ],
-      travelTime: '25-40 mins',
+      travelTime: '20-40 mins',
       popular: false,
     },
     {
-      region: 'Western Suburbs',
+      region: 'East Coast',
       suburbs: [
-        'Yarraville', 'Seddon', 'Footscray', 'Maribyrnong', 'Kensington',
-        'Flemington', 'North Melbourne', 'West Melbourne', 'Docklands'
+        'St Helens', 'Bicheno', 'Swansea', 'Triabunna', 'Orford',
+        'Sorell', 'Dodges Ferry', 'Primrose Sands', 'Carlton', 'Dunalley'
       ],
-      travelTime: '20-35 mins',
+      travelTime: '30-60 mins',
       popular: false,
     },
     {
-      region: 'Northern Suburbs',
+      region: 'West Coast',
       suburbs: [
-        'Brunswick', 'Brunswick East', 'Thornbury', 'Northcote', 'Preston',
-        'Coburg', 'Pascoe Vale', 'Essendon', 'Moonee Ponds', 'Ascot Vale'
+        'Strahan', 'Queenstown', 'Zeehan', 'Rosebery', 'Tullah',
+        'Waratah', 'Savage River', 'Corinna', 'Trial Harbour'
       ],
-      travelTime: '25-40 mins',
+      travelTime: '60-90 mins',
       popular: false,
     },
     {
-      region: 'Bayside',
+      region: 'South East',
       suburbs: [
-        'Elwood', 'Balaclava', 'Ripponlea', 'Gardenvale', 'Middle Park',
-        'Beaumaris', 'Black Rock', 'Cheltenham', 'Highett', 'Mentone'
+        'Huonville', 'Franklin', 'Geeveston', 'Dover', 'Southport',
+        'Cygnet', 'Woodbridge', 'Kettering', 'Margate', 'Snug'
       ],
-      travelTime: '30-45 mins',
+      travelTime: '30-60 mins',
       popular: false,
     },
   ];
@@ -82,11 +82,11 @@ export default function AreasPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Melbourne <span className="text-blue-600">Service Areas</span>
+              Tasmania <span className="text-blue-600">Service Areas</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Professional cleaning services across Melbourne and surrounding suburbs. 
-              We're your local cleaning experts, providing reliable service throughout the metropolitan area.
+              Professional cleaning services across Tasmania and surrounding areas. 
+              We're your local cleaning experts, providing reliable service throughout the beautiful island state.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -115,7 +115,7 @@ export default function AreasPage() {
               Areas We Service
             </h2>
             <p className="text-xl text-gray-600">
-              Comprehensive cleaning services across Melbourne's diverse suburbs
+              Comprehensive cleaning services across Tasmania's diverse regions
             </p>
           </div>
 
@@ -165,7 +165,7 @@ export default function AreasPage() {
                 All Services Available in Every Area
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                No matter which Melbourne suburb you're in, you can access our complete range 
+                No matter which Tasmanian town or city you're in, you can access our complete range 
                 of professional cleaning services.
               </p>
               
@@ -181,7 +181,7 @@ export default function AreasPage() {
             <div>
               <img
                 src="https://images.pexels.com/photos/4239119/pexels-photo-4239119.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Melbourne cleaning services"
+                alt="Tasmania cleaning services"
                 className="rounded-lg shadow-lg w-full"
               />
             </div>
@@ -194,10 +194,10 @@ export default function AreasPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Local Melbourne Business
+              Local Tasmania Business
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              As a locally owned and operated business, we understand Melbourne's unique needs 
+              As a locally owned and operated business, we understand Tasmania's unique needs 
               and are committed to serving our community with excellence.
             </p>
           </div>
@@ -209,7 +209,7 @@ export default function AreasPage() {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Local Knowledge</h3>
               <p className="text-gray-600">
-                We know Melbourne's neighborhoods, properties, and specific cleaning challenges that come with our diverse city.
+                We know Tasmania's towns, properties, and specific cleaning challenges that come with our diverse island state.
               </p>
             </div>
             
@@ -250,8 +250,8 @@ export default function AreasPage() {
             
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">50+</div>
-                <div className="text-blue-100">Suburbs Serviced</div>
+                <div className="text-3xl font-bold text-white mb-2">60+</div>
+                <div className="text-blue-100">Areas Serviced</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-white mb-2">500+</div>

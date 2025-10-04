@@ -18,7 +18,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-400 mb-4">
-              Professional cleaning services for homes and businesses across Melbourne. 
+              Professional cleaning services for homes and businesses across Tasmania. 
               Quality guaranteed with every clean.
             </p>
             <div className="flex space-x-4">
@@ -77,7 +77,7 @@ export default function Footer() {
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-blue-400 mt-1" />
                 <span className="text-gray-400">
-                  Melbourne, Victoria<br />
+                  Hobart, Tasmania<br />
                   Australia
                 </span>
               </div>

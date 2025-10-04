@@ -1,75 +1,78 @@
 import type { Metadata } from 'next';
 import { CheckCircle, Users, Award, Heart } from 'lucide-react';
+import AnimatedSection from '@/components/animations/AnimatedSection';
+import ParallaxContainer from '@/components/animations/ParallaxContainer';
+import AnimatedCard from '@/components/animations/AnimatedCard';
+import StaggerContainer from '@/components/animations/StaggerContainer';
+import { getWebsiteContent } from '@/lib/websiteContent';
 
-export const metadata: Metadata = {
-  title: 'About Us - Sparkle Clean Professional Cleaning Services',
-  description: 'Learn about Sparkle Clean, Melbourne\'s trusted cleaning professionals. Our story, values, and commitment to quality cleaning services.',
-};
+// Use incremental static regeneration with short revalidation
+export const revalidate = 1; // Revalidate every second
 
-export default function AboutPage() {
-  const values = [
-    {
-      icon: <CheckCircle className="w-8 h-8 text-blue-600" />,
-      title: 'Quality First',
-      description: 'We never compromise on quality. Every job is completed to the highest standard with attention to detail.',
-    },
-    {
-      icon: <Users className="w-8 h-8 text-blue-600" />,
-      title: 'Professional Team',
-      description: 'Our trained and experienced professionals are background-checked and fully insured for your peace of mind.',
-    },
-    {
-      icon: <Award className="w-8 h-8 text-blue-600" />,
-      title: 'Reliability',
-      description: 'Count on us to arrive on time, every time. We respect your schedule and deliver consistent results.',
-    },
-    {
-      icon: <Heart className="w-8 h-8 text-blue-600" />,
-      title: 'Customer Care',
-      description: 'Your satisfaction is our priority. We go the extra mile to ensure you\'re completely happy with our service.',
-    },
-  ];
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getWebsiteContent();
+  return {
+    title: content.seo.aboutTitle,
+    description: content.seo.aboutDescription,
+  };
+}
 
-  const whyChooseUs = [
-    'Over 10 years of experience in professional cleaning',
-    'Fully licensed, bonded, and insured',
-    'Eco-friendly cleaning products available',
-    'Flexible scheduling including weekends',
-    '100% satisfaction guarantee',
-    'Competitive pricing with no hidden fees',
-    'Trained and background-checked staff',
-    'State-of-the-art cleaning equipment',
-  ];
+export default async function AboutPage() {
+  const content = await getWebsiteContent();
+  
+  const values = content.about.values.map((value, index) => {
+    const icons = [
+      <CheckCircle className="w-8 h-8 text-blue-600" />,
+      <Users className="w-8 h-8 text-blue-600" />,
+      <Award className="w-8 h-8 text-blue-600" />,
+      <Heart className="w-8 h-8 text-blue-600" />
+    ];
+    
+    return {
+      icon: icons[index] || <CheckCircle className="w-8 h-8 text-blue-600" />,
+      title: value.title,
+      description: value.description,
+    };
+  });
+
+  const whyChooseUs = content.about.whyChooseUs;
 
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-white py-20">
+      <section className="bg-gradient-to-br from-blue-50 to-white py-20 relative overflow-hidden">
+        <ParallaxContainer speed={0.3} className="absolute top-10 right-10 w-32 h-32">
+          <div className="w-full h-full bg-blue-100 rounded-full opacity-30 animate-float" />
+        </ParallaxContainer>
+        <ParallaxContainer speed={0.5} direction="down" className="absolute bottom-10 left-10 w-24 h-24">
+          <div className="w-full h-full bg-purple-100 rounded-full opacity-20 animate-parallax-float" />
+        </ParallaxContainer>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                About <span className="text-blue-600">Sparkle Clean</span>
+            <AnimatedSection animation="fadeLeft">
+              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 animate-text-glow">
+                {content.about.title.split(' ').slice(0, 1).join(' ')} <span className="text-blue-600">{content.about.title.split(' ').slice(1).join(' ')}</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
-                For over a decade, we've been Melbourne's trusted cleaning professionals, 
-                delivering exceptional service to homes and businesses across the city.
+                {content.about.subtitle}
               </p>
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <AnimatedCard className="bg-white p-6 rounded-lg shadow-md" hoverScale={1.02}>
                 <h3 className="font-semibold text-gray-900 mb-2">Our Mission</h3>
                 <p className="text-gray-600">
-                  To provide reliable, professional cleaning services that exceed expectations 
-                  while maintaining the highest standards of quality and customer care.
+                  {content.about.mission}
                 </p>
-              </div>
-            </div>
-            <div>
-              <img
-                src="https://images.pexels.com/photos/4239119/pexels-photo-4239119.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Professional cleaning team"
-                className="rounded-lg shadow-lg w-full"
-              />
-            </div>
+              </AnimatedCard>
+            </AnimatedSection>
+            <AnimatedSection animation="fadeRight">
+              <ParallaxContainer speed={0.2} direction="up">
+                <img
+                  src="https://images.pexels.com/photos/4239119/pexels-photo-4239119.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Professional cleaning team"
+                  className="rounded-lg shadow-lg w-full hover-lift hover-tilt transition-all-smooth"
+                />
+              </ParallaxContainer>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -89,29 +92,7 @@ export default function AboutPage() {
 
             <div className="prose prose-lg max-w-none">
               <p className="text-gray-700 mb-6">
-                Sparkle Clean was founded in 2014 with a simple vision: to provide Melbourne residents 
-                and businesses with reliable, high-quality cleaning services they can trust. What started 
-                as a small family business has grown into one of Melbourne's most respected cleaning companies, 
-                serving hundreds of satisfied customers across the metropolitan area.
-              </p>
-              
-              <p className="text-gray-700 mb-6">
-                Our founder, Sarah Mitchell, started the company after years of working in the hospitality 
-                industry, where she learned the importance of maintaining pristine environments. She noticed 
-                a gap in the market for cleaning services that truly cared about quality and customer satisfaction, 
-                not just getting the job done quickly.
-              </p>
-
-              <p className="text-gray-700 mb-6">
-                Today, our team of experienced professionals continues to uphold the same values that Sarah 
-                established from day one: integrity, attention to detail, and genuine care for our customers' 
-                homes and businesses. We've expanded our services and invested in the latest cleaning technology, 
-                but our commitment to excellence remains unchanged.
-              </p>
-
-              <p className="text-gray-700">
-                We're proud to be a local Melbourne business, contributing to our community while helping 
-                create cleaner, healthier spaces for families and businesses throughout the city.
+                {content.about.story.description}
               </p>
             </div>
           </div>
@@ -119,28 +100,35 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 relative overflow-hidden">
+        <ParallaxContainer speed={0.4} className="absolute top-1/4 left-0 w-40 h-40">
+          <div className="w-full h-full bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full animate-morph-bg" />
+        </ParallaxContainer>
+        <ParallaxContainer speed={0.6} direction="down" className="absolute bottom-1/4 right-0 w-32 h-32">
+          <div className="w-full h-full bg-gradient-to-br from-green-200/20 to-blue-200/20 rounded-full animate-morph-bg" />
+        </ParallaxContainer>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <AnimatedSection animation="fadeUp" className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               Our Values
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               These core values guide everything we do and ensure we deliver exceptional service every time
             </p>
-          </div>
+          </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" staggerDelay={0.2}>
             {values.map((value, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-6">
+              <AnimatedCard key={index} className="text-center" delay={index * 0.1} hoverScale={1.05}>
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-6 transition-all-smooth hover:scale-110 hover:shadow-lg hover-glow">
                   {value.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">{value.title}</h3>
                 <p className="text-gray-600">{value.description}</p>
-              </div>
+              </AnimatedCard>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -150,7 +138,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                Why Choose Sparkle Clean?
+                Why Choose {content.company.name}?
               </h2>
               <p className="text-xl text-gray-600 mb-8">
                 We're more than just a cleaning service - we're your trusted partners in maintaining 
@@ -178,26 +166,33 @@ export default function AboutPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-blue-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-white mb-2">10+</div>
+      <section className="py-20 bg-blue-600 relative overflow-hidden">
+        <ParallaxContainer speed={0.3} className="absolute top-0 right-0 w-96 h-96 -translate-y-48 translate-x-48">
+          <div className="w-full h-full bg-white opacity-5 rounded-full animate-parallax-float" />
+        </ParallaxContainer>
+        <ParallaxContainer speed={0.5} direction="down" className="absolute bottom-0 left-0 w-64 h-64 translate-y-32 -translate-x-32">
+          <div className="w-full h-full bg-white opacity-5 rounded-full animate-float" />
+        </ParallaxContainer>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8" staggerDelay={0.2}>
+            <AnimatedCard className="text-center" hoverScale={1.1}>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero.stats.experience}</div>
               <div className="text-blue-100">Years Experience</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-white mb-2">500+</div>
+            </AnimatedCard>
+            <AnimatedCard className="text-center" delay={0.1} hoverScale={1.1}>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero.stats.customers}</div>
               <div className="text-blue-100">Happy Customers</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-white mb-2">2000+</div>
+            </AnimatedCard>
+            <AnimatedCard className="text-center" delay={0.2} hoverScale={1.1}>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero.stats.jobsCompleted}</div>
               <div className="text-blue-100">Jobs Completed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl lg:text-5xl font-bold text-white mb-2">100%</div>
+            </AnimatedCard>
+            <AnimatedCard className="text-center" delay={0.3} hoverScale={1.1}>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero.stats.satisfactionRate}</div>
               <div className="text-blue-100">Satisfaction Rate</div>
-            </div>
-          </div>
+            </AnimatedCard>
+          </StaggerContainer>
         </div>
       </section>
     </div>
