@@ -4,32 +4,71 @@ import AnimatedSection from '@/components/animations/AnimatedSection';
 import ParallaxContainer from '@/components/animations/ParallaxContainer';
 import AnimatedCard from '@/components/animations/AnimatedCard';
 import StaggerContainer from '@/components/animations/StaggerContainer';
-import { getWebsiteContent } from '@/lib/websiteContent';
 
-// Use incremental static regeneration with short revalidation
-export const revalidate = 1; // Revalidate every second
+export const metadata: Metadata = {
+  title: 'About Us - Sparkle Clean Professional Cleaning Services',
+  description: 'Learn about Sparkle Clean, Tasmania\'s trusted cleaning professionals.',
+};
 
-export async function generateMetadata(): Promise<Metadata> {
-  const content = await getWebsiteContent();
-  return {
-    title: content.seo.aboutTitle,
-    description: content.seo.aboutDescription,
+export default function AboutPage() {
+  // Use static content for now to ensure navigation works
+  const content = {
+    company: {
+      name: "Sparkle Clean 123"
+    },
+    about: {
+      title: "About Sparkle Clean",
+      subtitle: "For over a decade, we've been Tasmania's trusted cleaning professionals, delivering exceptional service to homes and businesses across the state.",
+      mission: "To provide reliable, professional cleaning services that exceed expectations while maintaining the highest standards of quality and customer care.",
+      story: {
+        description: "Sparkle Clean was founded in 2014 with a simple vision: to provide Tasmania residents and businesses with reliable, high-quality cleaning services they can trust."
+      },
+      values: [
+        {
+          title: "Quality First",
+          description: "We never compromise on quality. Every job is completed to the highest standard with attention to detail."
+        },
+        {
+          title: "Professional Team",
+          description: "Our trained and experienced professionals are background-checked and fully insured for your peace of mind."
+        },
+        {
+          title: "Reliable Service",
+          description: "Count on us to arrive on time and deliver consistent, dependable cleaning services."
+        },
+        {
+          title: "Customer Care",
+          description: "Your satisfaction is our priority. We go above and beyond to exceed your expectations."
+        }
+      ],
+      whyChooseUs: [
+        "Over 10 years of experience in professional cleaning",
+        "Fully licensed, bonded, and insured",
+        "100% satisfaction guarantee",
+        "Eco-friendly cleaning products available",
+        "Flexible scheduling to fit your needs"
+      ]
+    },
+    hero: {
+      stats: {
+        experience: "10+",
+        customers: "500+",
+        jobsCompleted: "2000+",
+        satisfactionRate: "100%"
+      }
+    }
   };
-}
-
-export default async function AboutPage() {
-  const content = await getWebsiteContent();
   
   const values = content.about.values.map((value, index) => {
     const icons = [
-      <CheckCircle className="w-8 h-8 text-blue-600" />,
-      <Users className="w-8 h-8 text-blue-600" />,
-      <Award className="w-8 h-8 text-blue-600" />,
-      <Heart className="w-8 h-8 text-blue-600" />
+      <CheckCircle key={0} className="w-8 h-8 text-blue-600" />,
+      <Users key={1} className="w-8 h-8 text-blue-600" />,
+      <Award key={2} className="w-8 h-8 text-blue-600" />,
+      <Heart key={3} className="w-8 h-8 text-blue-600" />
     ];
     
     return {
-      icon: icons[index] || <CheckCircle className="w-8 h-8 text-blue-600" />,
+      icon: icons[index] || <CheckCircle key={index} className="w-8 h-8 text-blue-600" />,
       title: value.title,
       description: value.description,
     };

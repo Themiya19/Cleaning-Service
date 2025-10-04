@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface PageTransitionProps {
   children: ReactNode;
@@ -14,40 +14,47 @@ const pageVariants = {
     y: 20,
     scale: 0.98
   },
-  in: {
+  animate: {
     opacity: 1,
     y: 0,
-    scale: 1
+    scale: 1,
+    transition: {
+      duration: 0.4,
+    },
   },
-  out: {
+  exit: {
     opacity: 0,
     y: -20,
-    scale: 1.02
-  }
-};
-
-const pageTransition = {
-  type: "tween" as const,
-  ease: [0.25, 0.46, 0.45, 0.94] as const,
-  duration: 0.4
+    scale: 1.02,
+    transition: {
+      duration: 0.3,
+    },
+  },
 };
 
 export default function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
+  const [isClient, setIsClient] = useState(false);
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return <div className="w-full">{children}</div>;
+  }
+
+  // Use a simple motion.div keyed by pathname for fade/slide transitions
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={pathname}
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariants}
-        transition={pageTransition}
-        className="w-full"
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      key={pathname}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={pageVariants}
+      className="w-full"
+    >
+      {children}
+    </motion.div>
   );
 }

@@ -7,12 +7,21 @@ import FloatingCallButton from '@/components/FloatingCallButton';
 import CookieConsent from '@/components/CookieConsent';
 import PageTransition from '@/components/animations/PageTransition';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800'],
+});
 
 export const metadata: Metadata = {
   title: 'Sparkle Clean - Professional Cleaning Services Melbourne',
   description: 'Professional cleaning services in Melbourne. Carpet cleaning, end of lease cleaning, office cleaning, and more. Quality guaranteed with every clean.',
   keywords: 'cleaning services melbourne, carpet cleaning, end of lease cleaning, office cleaning, professional cleaners',
+  viewport: 'width=device-width, initial-scale=1',
+  robots: 'index, follow',
+  authors: [{ name: 'Sparkle Clean' }],
+  creator: 'Sparkle Clean',
+  publisher: 'Sparkle Clean',
 };
 
 export default function RootLayout({

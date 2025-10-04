@@ -5,13 +5,23 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Default fallback content
+const defaultContent = {
+  company: {
+    name: 'Sparkle Clean',
+    tagline: 'Professional Services',
+    phone: '1300123456'
+  }
+};
+
 // Client-side content state
 let cachedContent: any = null;
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<any>(defaultContent);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,39 +34,47 @@ export default function Header() {
   useEffect(() => {
     const fetchContent = async () => {
       try {
+        // Use cached content if available
+        if (cachedContent) {
+          setContent(cachedContent);
+          setIsLoading(false);
+          return;
+        }
+
         // Add cache busting parameter to force fresh data
         const response = await fetch(`/api/website-content?t=${Date.now()}`);
         if (response.ok) {
           const data = await response.json();
           cachedContent = data;
           setContent(data);
+        } else {
+          // If API fails, use default content
+          console.warn('API failed, using default content');
+          setContent(defaultContent);
         }
       } catch (error) {
         console.error('Error fetching content:', error);
-        // Fallback content
-        setContent({
-          company: {
-            name: 'Sparkle Clean',
-            tagline: 'Professional Services',
-            phone: '1300123456'
-          }
-        });
+        // Fallback to default content
+        setContent(defaultContent);
+      } finally {
+        setIsLoading(false);
       }
     };
     
     fetchContent();
     
-    // Set up periodic refresh to catch content updates
+    // Set up periodic refresh to catch content updates (only if not using default)
     const interval = setInterval(() => {
-      fetchContent();
+      if (content !== defaultContent) {
+        fetchContent();
+      }
     }, 30000); // Refresh every 30 seconds
     
     return () => clearInterval(interval);
   }, []);
 
-  if (!content) {
-    return null; // or a loading skeleton
-  }
+  // Always render the header, even while loading
+  const currentContent = content || defaultContent;
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -106,13 +124,13 @@ export default function Header() {
                 className="text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600"
                 whileHover={{ scale: 1.02 }}
               >
-                {content.company.name}
+                {currentContent.company.name}
               </motion.h1>
               <motion.p 
                 className="text-sm text-gray-600 transition-colors group-hover:text-blue-500"
                 whileHover={{ x: 2 }}
               >
-                {content.company.tagline}
+                {currentContent.company.tagline}
               </motion.p>
             </div>
           </Link>
@@ -154,7 +172,7 @@ export default function Header() {
           {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-4">
             <motion.a
-              href={`tel:${content.company.phone}`}
+              href={`tel:${currentContent.company.phone}`}
               className="flex items-center space-x-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -165,7 +183,7 @@ export default function Header() {
               >
                 <Phone className="w-4 h-4" />
               </motion.div>
-              <span>{content.company.phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}</span>
+              <span>{currentContent.company.phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}</span>
             </motion.a>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -269,12 +287,12 @@ export default function Header() {
                     transition={{ duration: 0.3, delay: 0.8 }}
                   >
                     <motion.a
-                      href={`tel:${content.company.phone}`}
+                      href={`tel:${currentContent.company.phone}`}
                       className="flex items-center space-x-2 text-blue-600 font-semibold py-2 hover:pl-2 transition-all-smooth"
                       whileHover={{ x: 8, scale: 1.02 }}
                     >
                       <Phone className="w-4 h-4" />
-                      <span>{content.company.phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}</span>
+                      <span>{currentContent.company.phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}</span>
                     </motion.a>
                     <motion.div
                       whileHover={{ scale: 1.02 }}
