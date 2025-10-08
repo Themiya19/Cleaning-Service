@@ -8,7 +8,7 @@ export default function GalleryPage() {
   if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
   if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
 
-  const galleryItems = content.galleryItems || [];
+  const gallery = content.gallery || [];
   const serviceImages = content.serviceImages || [];
 
   return (
@@ -41,7 +41,7 @@ export default function GalleryPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {galleryItems.map((item: any, index: number) => (
+            {gallery.map((item: any, index: number) => (
               <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">{item.title}</h3>

@@ -1,8 +1,8 @@
 {
   "company": {
-    "name": "Sparkle Clean 123",
+    "name": "Sparkle Clean 1234",
     "tagline": "Professional Services",
-    "phone": "1300123456",
+    "phone": "123456789",
     "email": "info@sparkleclean.com.au",
     "address": "Hobart, TAS, Australia"
   },
@@ -10,7 +10,7 @@
     "title": "Professional Cleaning Services in Tasmania 3",
     "subtitle": "Experience the difference with Tasmania's most trusted cleaning professionals. Quality guaranteed, every time.",
     "primaryCTA": "Get Free Quote",
-    "secondaryCTA": "Call Now themiya",
+    "secondaryCTA": "Call Now",
     "stats": {
       "customers": "500+",
       "rating": "5.0",
@@ -226,5 +226,20 @@
     "aboutDescription": "Learn about Sparkle Clean, Tasmania's trusted cleaning professionals. Our story, values, and commitment to quality cleaning services.",
     "servicesTitle": "Professional Cleaning Services Tasmania - Sparkle Clean",
     "servicesDescription": "Complete range of professional cleaning services in Tasmania. Carpet cleaning, end of lease cleaning, office cleaning, and more. Get your free quote today."
-  }
+  },
+  "gallery": [
+    {
+      "title": "themiha",
+      "before": "https://images.pexels.com/photos/32276235/pexels-photo-32276235.jpeg",
+      "after": "https://images.pexels.com/photos/31728429/pexels-photo-31728429.jpeg",
+      "description": "jf asfj dsakfjl dasfjkldasjfjdklsjfkld f dfj dkf jalskdjf"
+    }
+  ],
+  "serviceImages": [
+    {
+      "image": "https://images.pexels.com/photos/4239119/pexels-photo-4239119.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "title": "Professional Equipment",
+      "description": "We use the latest professional-grade cleaning equipment for every job."
+    }
+  ]
 }

@@ -1,7 +1,18 @@
+'use client';
+
 import Link from 'next/link';
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
+import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function Footer() {
+  const { content, isLoading } = useWebsiteContent();
+  const company = content?.company || {
+    name: 'Sparkle Clean',
+    tagline: 'Professional Services',
+    phone: '1300123456',
+    email: 'info@sparkleclean.com.au',
+    address: 'Hobart, Tasmania, Australia',
+  };
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -13,8 +24,8 @@ export default function Footer() {
                 <span className="text-white font-bold text-xl">SC</span>
               </div>
               <div>
-                <h3 className="text-xl font-bold">Sparkle Clean</h3>
-                <p className="text-sm text-gray-400">Professional Services</p>
+                <h3 className="text-xl font-bold">{company.name}</h3>
+                <p className="text-sm text-gray-400">{company.tagline}</p>
               </div>
             </div>
             <p className="text-gray-400 mb-4">
@@ -64,21 +75,22 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-400" />
-                <a href="tel:1300123456" className="text-gray-400 hover:text-white transition-colors">
-                  1300 123 456
+                <a href={`tel:${company.phone}`} className="text-gray-400 hover:text-white transition-colors">
+                  {company.phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-400" />
-                <a href="mailto:info@sparkleclean.com.au" className="text-gray-400 hover:text-white transition-colors">
-                  info@sparkleclean.com.au
+                <a href={`mailto:${company.email}`} className="text-gray-400 hover:text-white transition-colors">
+                  {company.email}
                 </a>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-blue-400 mt-1" />
                 <span className="text-gray-400">
-                  Hobart, Tasmania<br />
-                  Australia
+                  {company.address.split(',').map((line: string, i: number) => (
+                    <span key={i}>{line.trim()}<br /></span>
+                  ))}
                 </span>
               </div>
             </div>

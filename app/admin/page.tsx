@@ -46,6 +46,7 @@ interface WebsiteContent {
       jobsCompleted: string;
       satisfactionRate: string;
     };
+    image: string;
   };
   about: {
     title: string;
@@ -61,6 +62,7 @@ interface WebsiteContent {
       description: string;
     }>;
     whyChooseUs: string[];
+    image: string;
   };
   services: Array<{
     id: string;
@@ -94,6 +96,17 @@ interface WebsiteContent {
     servicesTitle: string;
     servicesDescription: string;
   };
+  gallery: Array<{
+    title: string;
+    before: string;
+    after: string;
+    description: string;
+  }>;
+  serviceImages: Array<{
+    image: string;
+    title: string;
+    description: string;
+  }>;
 }
 
 export default function AdminPage() {
@@ -232,14 +245,13 @@ export default function AdminPage() {
 
   const addArrayItem = (path: string[], item: any) => {
     if (!content) return;
-    
     const newContent = { ...content };
     let current: any = newContent;
-    
     for (const segment of path) {
+      if (!current[segment]) current[segment] = [];
       current = current[segment];
     }
-    
+    if (!Array.isArray(current)) return;
     current.push(item);
     setContent(newContent);
   };
@@ -362,13 +374,14 @@ export default function AdminPage() {
         </div>
 
         <Tabs defaultValue="company" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="company">Company</TabsTrigger>
             <TabsTrigger value="hero">Hero</TabsTrigger>
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="services">Services</TabsTrigger>
             <TabsTrigger value="testimonials">Reviews</TabsTrigger>
             <TabsTrigger value="seo">SEO</TabsTrigger>
+            <TabsTrigger value="gallery">Gallery</TabsTrigger>
           </TabsList>
 
           {/* Company Info */}
@@ -475,6 +488,15 @@ export default function AdminPage() {
                       onChange={(e) => updateContent(['hero', 'subtitle'], e.target.value)}
                       placeholder="Hero subtitle/description"
                       rows={3}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="hero-image">Hero Image URL</Label>
+                    <Input
+                      id="hero-image"
+                      value={content.hero.image || ''}
+                      onChange={(e) => updateContent(['hero', 'image'], e.target.value)}
+                      placeholder="Hero section image URL"
                     />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -592,6 +614,15 @@ export default function AdminPage() {
                         onChange={(e) => updateContent(['about', 'mission'], e.target.value)}
                         placeholder="Company mission statement"
                         rows={3}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="about-image">About Image URL</Label>
+                      <Input
+                        id="about-image"
+                        value={content.about.image || ''}
+                        onChange={(e) => updateContent(['about', 'image'], e.target.value)}
+                        placeholder="About section image URL"
                       />
                     </div>
                   </div>
@@ -1097,6 +1128,155 @@ export default function AdminPage() {
                       rows={3}
                     />
                   </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Gallery */}
+          <TabsContent value="gallery">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  Gallery Images
+                  <Button
+                    onClick={() => addArrayItem(['gallery'], { title: '', before: '', after: '', description: '' })}
+                    size="sm"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Gallery Item
+                  </Button>
+                </CardTitle>
+                <CardDescription>Manage before/after gallery images</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  {content.gallery && content.gallery.map((item, index) => (
+                    <Card key={index} className="border-l-4 border-l-purple-500">
+                      <CardHeader>
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="text-lg">{item.title || `Gallery Item ${index + 1}`}</CardTitle>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => removeArrayItem(['gallery'], index)}
+                            className="text-red-600 hover:text-red-700"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <Input
+                          value={item.title}
+                          onChange={e => {
+                            const newGallery = [...content.gallery];
+                            newGallery[index].title = e.target.value;
+                            updateContent(['gallery'], newGallery);
+                          }}
+                          placeholder="Gallery item title"
+                        />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <Input
+                            value={item.before}
+                            onChange={e => {
+                              const newGallery = [...content.gallery];
+                              newGallery[index].before = e.target.value;
+                              updateContent(['gallery'], newGallery);
+                            }}
+                            placeholder="Before image URL"
+                          />
+                          <Input
+                            value={item.after}
+                            onChange={e => {
+                              const newGallery = [...content.gallery];
+                              newGallery[index].after = e.target.value;
+                              updateContent(['gallery'], newGallery);
+                            }}
+                            placeholder="After image URL"
+                          />
+                        </div>
+                        <Textarea
+                          value={item.description}
+                          onChange={e => {
+                            const newGallery = [...content.gallery];
+                            newGallery[index].description = e.target.value;
+                            updateContent(['gallery'], newGallery);
+                          }}
+                          placeholder="Gallery item description"
+                          rows={2}
+                        />
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Behind the Scenes Section */}
+            <Card className="mt-8">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  Behind the Scenes
+                  <Button
+                    onClick={() => addArrayItem(['serviceImages'], { image: '', title: '', description: '' })}
+                    size="sm"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Behind the Scenes Image
+                  </Button>
+                </CardTitle>
+                <CardDescription>Manage 'Behind the Scenes' images, titles, and descriptions</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  {content.serviceImages && content.serviceImages.map((item, index) => (
+                    <Card key={index} className="border-l-4 border-l-gray-500">
+                      <CardHeader>
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="text-lg">{item.title || `Behind the Scenes ${index + 1}`}</CardTitle>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => removeArrayItem(['serviceImages'], index)}
+                            className="text-red-600 hover:text-red-700"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <Input
+                          value={item.title}
+                          onChange={e => {
+                            const newImages = [...content.serviceImages];
+                            newImages[index].title = e.target.value;
+                            updateContent(['serviceImages'], newImages);
+                          }}
+                          placeholder="Image title"
+                        />
+                        <Input
+                          value={item.image}
+                          onChange={e => {
+                            const newImages = [...content.serviceImages];
+                            newImages[index].image = e.target.value;
+                            updateContent(['serviceImages'], newImages);
+                          }}
+                          placeholder="Image URL"
+                        />
+                        <Textarea
+                          value={item.description}
+                          onChange={e => {
+                            const newImages = [...content.serviceImages];
+                            newImages[index].description = e.target.value;
+                            updateContent(['serviceImages'], newImages);
+                          }}
+                          placeholder="Image description"
+                          rows={2}
+                        />
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               </CardContent>
             </Card>
