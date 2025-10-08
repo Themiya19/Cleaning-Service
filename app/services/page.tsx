@@ -1,3 +1,5 @@
+'use client';
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CheckCircle, Clock, Star, Phone } from 'lucide-react';
@@ -5,23 +7,18 @@ import AnimatedSection from '@/components/animations/AnimatedSection';
 import ParallaxContainer from '@/components/animations/ParallaxContainer';
 import AnimatedCard from '@/components/animations/AnimatedCard';
 import StaggerContainer from '@/components/animations/StaggerContainer';
+import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 import { getWebsiteContent } from '@/lib/websiteContent';
 
-// Use incremental static regeneration with short revalidation
-export const revalidate = 1; // Revalidate every second
+// Removed export const revalidate and export async function generateMetadata
 
-export async function generateMetadata(): Promise<Metadata> {
-  const content = await getWebsiteContent();
-  return {
-    title: content.seo.servicesTitle,
-    description: content.seo.servicesDescription,
-  };
-}
+export default function ServicesPage() {
+  const { content, isLoading, error } = useWebsiteContent();
+  if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
+  if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
 
-export default async function ServicesPage() {
-  const content = await getWebsiteContent();
-  const services = content.services;
-  const addOns = content.addOns;
+  const services = content.services || [];
+  const addOns = content.addOns || [];
 
   return (
     <div>
@@ -78,7 +75,7 @@ export default async function ServicesPage() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-12" staggerDelay={0.2}>
-            {services.map((service, index) => (
+            {services.map((service: any, index: number) => (
               <AnimatedCard key={index} className="bg-white rounded-lg shadow-lg overflow-hidden group" delay={index * 0.1} hoverScale={1.02}>
                 <div className="relative overflow-hidden">
                   <img
@@ -105,7 +102,7 @@ export default async function ServicesPage() {
                   <div className="mb-6">
                     <h4 className="font-semibold text-gray-900 mb-3">What's Included:</h4>
                     <ul className="grid grid-cols-1 gap-2">
-                      {service.features.map((feature, idx) => (
+                      {service.features.map((feature: string, idx: number) => (
                         <li key={idx} className="flex items-center gap-2">
                           <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 transition-transform-smooth hover:scale-125" />
                           <span className="text-gray-700">{feature}</span>
@@ -140,7 +137,7 @@ export default async function ServicesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {addOns.map((addon, index) => (
+            {addOns.map((addon: any, index: number) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex justify-between items-center">
                   <h3 className="font-semibold text-gray-900">{addon.name}</h3>

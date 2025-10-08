@@ -1,72 +1,15 @@
-import type { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Before & After Gallery - Sparkle Clean Professional Cleaning',
-  description: 'See the amazing results of our professional cleaning services. Before and after photos of carpet cleaning, deep cleaning, and more in Melbourne.',
-};
+import type { Metadata } from 'next';
+import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function GalleryPage() {
-  const galleryItems = [
-    {
-      title: 'Carpet Steam Cleaning',
-      before: 'https://images.pexels.com/photos/6195129/pexels-photo-6195129.jpeg?auto=compress&cs=tinysrgb&w=600',
-      after: 'https://images.pexels.com/photos/4239146/pexels-photo-4239146.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: 'Deep steam cleaning removed years of stains and restored the carpet\'s original color.',
-    },
-    {
-      title: 'Kitchen Deep Clean',
-      before: 'https://images.pexels.com/photos/4239037/pexels-photo-4239037.jpeg?auto=compress&cs=tinysrgb&w=600',
-      after: 'https://images.pexels.com/photos/4239031/pexels-photo-4239031.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: 'Complete kitchen transformation including oven, rangehood, and all surfaces.',
-    },
-    {
-      title: 'Office Cleaning',
-      before: 'https://images.pexels.com/photos/7089020/pexels-photo-7089020.jpeg?auto=compress&cs=tinysrgb&w=600',
-      after: 'https://images.pexels.com/photos/4239119/pexels-photo-4239119.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: 'Professional office space cleaned and sanitized for a healthy work environment.',
-    },
-    {
-      title: 'Bathroom Restoration',
-      before: 'https://images.pexels.com/photos/6197119/pexels-photo-6197119.jpeg?auto=compress&cs=tinysrgb&w=600',
-      after: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: 'Thorough bathroom cleaning removing soap scum, mold, and limescale buildup.',
-    },
-    {
-      title: 'Window Cleaning',
-      before: 'https://images.pexels.com/photos/5591831/pexels-photo-5591831.jpeg?auto=compress&cs=tinysrgb&w=600',
-      after: 'https://images.pexels.com/photos/6195129/pexels-photo-6195129.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: 'Crystal clear windows inside and out with frames and sills cleaned.',
-    },
-    {
-      title: 'End of Lease Clean',
-      before: 'https://images.pexels.com/photos/4239146/pexels-photo-4239146.jpeg?auto=compress&cs=tinysrgb&w=600',
-      after: 'https://images.pexels.com/photos/4239037/pexels-photo-4239037.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: 'Complete property transformation ensuring full bond return for tenant.',
-    },
-  ];
+  const { content, isLoading, error } = useWebsiteContent();
+  if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
+  if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
 
-  const serviceImages = [
-    {
-      title: 'Professional Equipment',
-      image: 'https://images.pexels.com/photos/4239031/pexels-photo-4239031.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: 'State-of-the-art cleaning equipment for superior results.',
-    },
-    {
-      title: 'Eco-Friendly Products',
-      image: 'https://images.pexels.com/photos/7089020/pexels-photo-7089020.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: 'Safe, effective cleaning products that protect your family and environment.',
-    },
-    {
-      title: 'Trained Professionals',
-      image: 'https://images.pexels.com/photos/4239119/pexels-photo-4239119.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: 'Experienced team members dedicated to delivering exceptional results.',
-    },
-    {
-      title: 'Quality Guarantee',
-      image: 'https://images.pexels.com/photos/6197119/pexels-photo-6197119.jpeg?auto=compress&cs=tinysrgb&w=600',
-      description: '100% satisfaction guarantee on all our cleaning services.',
-    },
-  ];
+  const galleryItems = content.galleryItems || [];
+  const serviceImages = content.serviceImages || [];
 
   return (
     <div>
@@ -98,7 +41,7 @@ export default function GalleryPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {galleryItems.map((item, index) => (
+            {galleryItems.map((item: any, index: number) => (
               <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">{item.title}</h3>
@@ -147,7 +90,7 @@ export default function GalleryPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {serviceImages.map((item, index) => (
+            {serviceImages.map((item: any, index: number) => (
               <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <img
                   src={item.image}

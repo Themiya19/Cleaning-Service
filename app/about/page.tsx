@@ -1,80 +1,32 @@
+'use client';
+
 import type { Metadata } from 'next';
 import { CheckCircle, Users, Award, Heart } from 'lucide-react';
 import AnimatedSection from '@/components/animations/AnimatedSection';
 import ParallaxContainer from '@/components/animations/ParallaxContainer';
 import AnimatedCard from '@/components/animations/AnimatedCard';
 import StaggerContainer from '@/components/animations/StaggerContainer';
-
-export const metadata: Metadata = {
-  title: 'About Us - Sparkle Clean Professional Cleaning Services',
-  description: 'Learn about Sparkle Clean, Tasmania\'s trusted cleaning professionals.',
-};
+import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function AboutPage() {
-  // Use static content for now to ensure navigation works
-  const content = {
-    company: {
-      name: "Sparkle Clean 123"
-    },
-    about: {
-      title: "About Sparkle Clean",
-      subtitle: "For over a decade, we've been Tasmania's trusted cleaning professionals, delivering exceptional service to homes and businesses across the state.",
-      mission: "To provide reliable, professional cleaning services that exceed expectations while maintaining the highest standards of quality and customer care.",
-      story: {
-        description: "Sparkle Clean was founded in 2014 with a simple vision: to provide Tasmania residents and businesses with reliable, high-quality cleaning services they can trust."
-      },
-      values: [
-        {
-          title: "Quality First",
-          description: "We never compromise on quality. Every job is completed to the highest standard with attention to detail."
-        },
-        {
-          title: "Professional Team",
-          description: "Our trained and experienced professionals are background-checked and fully insured for your peace of mind."
-        },
-        {
-          title: "Reliable Service",
-          description: "Count on us to arrive on time and deliver consistent, dependable cleaning services."
-        },
-        {
-          title: "Customer Care",
-          description: "Your satisfaction is our priority. We go above and beyond to exceed your expectations."
-        }
-      ],
-      whyChooseUs: [
-        "Over 10 years of experience in professional cleaning",
-        "Fully licensed, bonded, and insured",
-        "100% satisfaction guarantee",
-        "Eco-friendly cleaning products available",
-        "Flexible scheduling to fit your needs"
-      ]
-    },
-    hero: {
-      stats: {
-        experience: "10+",
-        customers: "500+",
-        jobsCompleted: "2000+",
-        satisfactionRate: "100%"
-      }
-    }
-  };
-  
-  const values = content.about.values.map((value, index) => {
+  const { content, isLoading, error } = useWebsiteContent();
+  if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
+  if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
+
+  const values = content.about?.values?.map((value: any, index: number) => {
     const icons = [
       <CheckCircle key={0} className="w-8 h-8 text-blue-600" />,
       <Users key={1} className="w-8 h-8 text-blue-600" />,
       <Award key={2} className="w-8 h-8 text-blue-600" />,
       <Heart key={3} className="w-8 h-8 text-blue-600" />
     ];
-    
     return {
       icon: icons[index] || <CheckCircle key={index} className="w-8 h-8 text-blue-600" />,
       title: value.title,
       description: value.description,
     };
-  });
-
-  const whyChooseUs = content.about.whyChooseUs;
+  }) || [];
+  const whyChooseUs = content.about?.whyChooseUs || [];
 
   return (
     <div>
@@ -91,15 +43,15 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection animation="fadeLeft">
               <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 animate-text-glow">
-                {content.about.title.split(' ').slice(0, 1).join(' ')} <span className="text-blue-600">{content.about.title.split(' ').slice(1).join(' ')}</span>
+                {content.about?.title?.split(' ').slice(0, 1).join(' ')} <span className="text-blue-600">{content.about?.title?.split(' ').slice(1).join(' ')}</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
-                {content.about.subtitle}
+                {content.about?.subtitle}
               </p>
               <AnimatedCard className="bg-white p-6 rounded-lg shadow-md" hoverScale={1.02}>
                 <h3 className="font-semibold text-gray-900 mb-2">Our Mission</h3>
                 <p className="text-gray-600">
-                  {content.about.mission}
+                  {content.about?.mission}
                 </p>
               </AnimatedCard>
             </AnimatedSection>
@@ -131,7 +83,7 @@ export default function AboutPage() {
 
             <div className="prose prose-lg max-w-none">
               <p className="text-gray-700 mb-6">
-                {content.about.story.description}
+                {content.about?.story?.description}
               </p>
             </div>
           </div>
@@ -158,7 +110,7 @@ export default function AboutPage() {
           </AnimatedSection>
 
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" staggerDelay={0.2}>
-            {values.map((value, index) => (
+            {values.map((value: any, index: number) => (
               <AnimatedCard key={index} className="text-center" delay={index * 0.1} hoverScale={1.05}>
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-6 transition-all-smooth hover:scale-110 hover:shadow-lg hover-glow">
                   {value.icon}
@@ -177,7 +129,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                Why Choose {content.company.name}?
+                Why Choose {content.company?.name}?
               </h2>
               <p className="text-xl text-gray-600 mb-8">
                 We're more than just a cleaning service - we're your trusted partners in maintaining 
@@ -185,7 +137,7 @@ export default function AboutPage() {
               </p>
               
               <div className="grid grid-cols-1 gap-4">
-                {whyChooseUs.map((item, index) => (
+                {whyChooseUs.map((item: string, index: number) => (
                   <div key={index} className="flex items-start gap-3">
                     <CheckCircle className="w-6 h-6 text-green-600 mt-0.5 flex-shrink-0" />
                     <span className="text-gray-700">{item}</span>
@@ -216,19 +168,19 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8" staggerDelay={0.2}>
             <AnimatedCard className="text-center" hoverScale={1.1}>
-              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero.stats.experience}</div>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero?.stats?.experience}</div>
               <div className="text-blue-100">Years Experience</div>
             </AnimatedCard>
             <AnimatedCard className="text-center" delay={0.1} hoverScale={1.1}>
-              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero.stats.customers}</div>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero?.stats?.customers}</div>
               <div className="text-blue-100">Happy Customers</div>
             </AnimatedCard>
             <AnimatedCard className="text-center" delay={0.2} hoverScale={1.1}>
-              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero.stats.jobsCompleted}</div>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero?.stats?.jobsCompleted}</div>
               <div className="text-blue-100">Jobs Completed</div>
             </AnimatedCard>
             <AnimatedCard className="text-center" delay={0.3} hoverScale={1.1}>
-              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero.stats.satisfactionRate}</div>
+              <div className="text-4xl lg:text-5xl font-bold text-white mb-2 animate-bounce-in">{content.hero?.stats?.satisfactionRate}</div>
               <div className="text-blue-100">Satisfaction Rate</div>
             </AnimatedCard>
           </StaggerContainer>

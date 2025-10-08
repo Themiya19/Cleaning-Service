@@ -1,117 +1,16 @@
+'use client';
+
 import type { Metadata } from 'next';
 import { Star, Quote } from 'lucide-react';
-
-export const metadata: Metadata = {
-  title: 'Customer Reviews & Testimonials - Sparkle Clean',
-  description: 'Read what our satisfied customers say about Sparkle Clean\'s professional cleaning services in Melbourne. Real reviews from real customers.',
-};
+import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function TestimonialsPage() {
-  const testimonials = [
-    {
-      name: 'Sarah Johnson',
-      location: 'Carlton, VIC',
-      service: 'Carpet Cleaning',
-      rating: 5,
-      text: 'Absolutely exceptional service! The team at Sparkle Clean transformed our carpets. They looked brand new after their steam cleaning service. The technicians were professional, punctual, and extremely thorough. I couldn\'t be happier with the results.',
-      date: '2 weeks ago',
-    },
-    {
-      name: 'Michael Chen',
-      location: 'Richmond, VIC',
-      service: 'End of Lease Cleaning',
-      rating: 5,
-      text: 'I was stressed about getting my bond back, but Sparkle Clean made it so easy. They followed the real estate checklist perfectly and cleaned every corner of the property. Got my full bond back thanks to their meticulous work!',
-      date: '1 month ago',
-    },
-    {
-      name: 'Emma Wilson',
-      location: 'South Yarra, VIC',
-      service: 'Office Cleaning',
-      rating: 5,
-      text: 'We\'ve been using Sparkle Clean for our office cleaning for over a year now. They\'re consistently reliable, professional, and do an outstanding job. Our workspace has never been cleaner. Highly recommend for any business.',
-      date: '3 weeks ago',
-    },
-    {
-      name: 'David Thompson',
-      location: 'Brighton, VIC',
-      service: 'Deep Cleaning',
-      rating: 5,
-      text: 'After renovations, our house was a complete mess. Sparkle Clean\'s deep cleaning service was incredible - they cleaned places I didn\'t even know needed cleaning! The attention to detail was amazing.',
-      date: '1 week ago',
-    },
-    {
-      name: 'Lisa Rodriguez',
-      location: 'Fitzroy, VIC',
-      service: 'Regular House Cleaning',
-      rating: 5,
-      text: 'Having Sparkle Clean come bi-weekly has been life-changing. The same cleaner comes each time, knows our preferences, and always does a fantastic job. It\'s so nice to come home to a spotless house!',
-      date: '4 days ago',
-    },
-    {
-      name: 'James Mitchell',
-      location: 'St Kilda, VIC',
-      service: 'Window Cleaning',
-      rating: 5,
-      text: 'Professional window cleaning service that delivered exactly what they promised - crystal clear, streak-free windows. They cleaned the frames and sills too. Great value for money.',
-      date: '2 weeks ago',
-    },
-    {
-      name: 'Amanda Foster',
-      location: 'Prahran, VIC',
-      service: 'Carpet Cleaning',
-      rating: 5,
-      text: 'My carpets had some tough stains that I thought were permanent. Sparkle Clean not only removed them completely but also eliminated the pet odors. The carpets smell fresh and look amazing!',
-      date: '1 month ago',
-    },
-    {
-      name: 'Robert Kim',
-      location: 'Toorak, VIC',
-      service: 'End of Lease Cleaning',
-      rating: 5,
-      text: 'Quick, efficient, and thorough. The team arrived on time and completed the end of lease clean faster than expected without compromising on quality. The real estate agent was impressed!',
-      date: '3 weeks ago',
-    },
-    {
-      name: 'Rachel Green',
-      location: 'Caulfield, VIC',
-      service: 'Office Cleaning',
-      rating: 5,
-      text: 'Sparkle Clean has been cleaning our medical practice for months. They understand the importance of hygiene in our environment and always use appropriate products. Very reliable and professional.',
-      date: '1 week ago',
-    },
-    {
-      name: 'Mark Davis',
-      location: 'Windsor, VIC',
-      service: 'Deep Cleaning',
-      rating: 5,
-      text: 'Booked a deep clean before hosting family for the holidays. The team was incredible - they cleaned inside appliances, light fixtures, baseboards, everything! My house has never looked better.',
-      date: '5 days ago',
-    },
-    {
-      name: 'Sophie Turner',
-      location: 'Albert Park, VIC',
-      service: 'Regular House Cleaning',
-      rating: 5,
-      text: 'The consistency is what I love most about Sparkle Clean. Every visit is the same high standard. They\'re trustworthy, thorough, and always leave my home sparkling clean.',
-      date: '1 week ago',
-    },
-    {
-      name: 'Paul Anderson',
-      location: 'Hawthorn, VIC',
-      service: 'Window Cleaning',
-      rating: 5,
-      text: 'Had both interior and exterior windows cleaned. The difference is remarkable! Natural light flows so much better now. The team was careful with my garden and left no mess behind.',
-      date: '2 weeks ago',
-    },
-  ];
+  const { content, isLoading, error } = useWebsiteContent();
+  if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
+  if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
 
-  const stats = [
-    { number: '500+', label: 'Happy Customers' },
-    { number: '2000+', label: 'Jobs Completed' },
-    { number: '5.0', label: 'Average Rating' },
-    { number: '98%', label: 'Customer Retention' },
-  ];
+  const testimonials = content.testimonials || [];
+  const stats = content.hero?.stats || [];
 
   return (
     <div>
@@ -143,7 +42,7 @@ export default function TestimonialsPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
+            {stats.map((stat: any, index: number) => (
               <div key={index} className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
                 <div className="text-gray-600">{stat.label}</div>
@@ -157,7 +56,7 @@ export default function TestimonialsPage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+            {testimonials.map((testimonial: any, index: number) => (
               <div key={index} className="bg-white p-8 rounded-lg shadow-lg relative">
                 <Quote className="w-8 h-8 text-blue-200 mb-4" />
                 

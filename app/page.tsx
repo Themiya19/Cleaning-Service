@@ -1,35 +1,35 @@
+'use client';
+
 import Link from 'next/link';
 import { Star, CheckCircle, Phone, Mail, Users, Clock, Shield, Award } from 'lucide-react';
 import AnimatedSection from '@/components/animations/AnimatedSection';
 import ParallaxContainer from '@/components/animations/ParallaxContainer';
 import AnimatedCard from '@/components/animations/AnimatedCard';
 import StaggerContainer from '@/components/animations/StaggerContainer';
-import { getWebsiteContent } from '@/lib/websiteContent';
+import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 // Use incremental static regeneration with short revalidation
 export const revalidate = 1; // Revalidate every second
 
-export default async function HomePage() {
-  const content = await getWebsiteContent();
-  
-  // Take first 4 services for homepage
-  const services = content.services.slice(0, 4).map(service => ({
+export default function HomePage() {
+  const { content, isLoading, error } = useWebsiteContent();
+  if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
+  if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
+
+  const services = content.services?.slice(0, 4).map((service: any) => ({
     title: service.title,
     description: service.shortDescription,
     price: service.price,
-    image: service.image.replace('w=600', 'w=400'), // Optimize for homepage
-  }));
-
-  const testimonials = content.testimonials;
-
-  const features = content.features.map((feature, index) => {
+    image: service.image.replace('w=600', 'w=400'),
+  })) || [];
+  const testimonials = content.testimonials || [];
+  const features = (content.features || []).map((feature: any, index: number) => {
     const icons = [
       <Shield className="w-8 h-8 text-blue-600" />,
       <Users className="w-8 h-8 text-blue-600" />,
       <Clock className="w-8 h-8 text-blue-600" />,
       <Award className="w-8 h-8 text-blue-600" />
     ];
-    
     return {
       icon: icons[index] || <Shield className="w-8 h-8 text-blue-600" />,
       title: feature.title,
@@ -145,7 +145,7 @@ export default async function HomePage() {
           </AnimatedSection>
           
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" staggerDelay={0.15}>
-            {services.map((service, index) => (
+            {services.map((service: any, index: number) => (
               <AnimatedCard 
                 key={index} 
                 className="bg-white rounded-lg shadow-lg overflow-hidden group"
@@ -210,7 +210,7 @@ export default async function HomePage() {
           </AnimatedSection>
 
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10" staggerDelay={0.2}>
-            {features.map((feature, index) => (
+            {features.map((feature: any, index: number) => (
               <AnimatedCard key={index} className="text-center group" delay={index * 0.1} hoverScale={1.05}>
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full mb-6 transition-all-smooth group-hover:scale-110 group-hover:shadow-lg hover-glow">
                   {feature.icon}
@@ -243,7 +243,7 @@ export default async function HomePage() {
           </AnimatedSection>
 
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8" staggerDelay={0.2}>
-            {testimonials.map((testimonial, index) => (
+            {testimonials.map((testimonial: any, index: number) => (
               <AnimatedCard 
                 key={index} 
                 className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-lg border border-gray-100 group" 

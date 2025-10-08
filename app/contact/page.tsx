@@ -3,8 +3,10 @@
 import type { Metadata } from 'next';
 import { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, CheckCircle } from 'lucide-react';
+import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function ContactPage() {
+  const { content, isLoading, error } = useWebsiteContent();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,6 +15,10 @@ export default function ContactPage() {
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
+  if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
+
+  const services = content.services?.map((s: any) => s.title) || [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,16 +45,6 @@ export default function ContactPage() {
       [e.target.name]: e.target.value,
     });
   };
-
-  const services = [
-    'Carpet Cleaning',
-    'End of Lease Cleaning',
-    'Office Cleaning',
-    'Deep Cleaning',
-    'Window Cleaning',
-    'Regular House Cleaning',
-    'Other',
-  ];
 
   return (
     <div>
@@ -145,7 +141,7 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Select a service</option>
-                      {services.map((service) => (
+                      {services.map((service: string) => (
                         <option key={service} value={service}>
                           {service}
                         </option>

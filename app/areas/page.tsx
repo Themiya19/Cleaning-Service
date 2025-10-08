@@ -1,79 +1,17 @@
+'use client';
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { MapPin, Clock, Phone, CheckCircle } from 'lucide-react';
-
-export const metadata: Metadata = {
-  title: 'Service Areas Tasmania - Professional Cleaning Services | Sparkle Clean',
-  description: 'Professional cleaning services across Tasmania. We service Hobart, Launceston, Devonport, Burnie, and more. Check if we service your area.',
-};
+import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function AreasPage() {
-  const serviceAreas = [
-    {
-      region: 'Greater Hobart',
-      suburbs: [
-        'Hobart CBD', 'Battery Point', 'South Hobart', 'Mount Stuart', 'Sandy Bay',
-        'Taroona', 'Kingston', 'Blackmans Bay', 'Howrah', 'Bellerive',
-        'Rosny Park', 'Montrose', 'Glenorchy', 'New Town'
-      ],
-      travelTime: '15-30 mins',
-      popular: true,
-    },
-    {
-      region: 'Launceston Area',
-      suburbs: [
-        'Launceston CBD', 'East Launceston', 'West Launceston', 'South Launceston', 'Newstead',
-        'Invermay', 'Norwood', 'St Leonards', 'Prospect', 'Summerhill'
-      ],
-      travelTime: '15-25 mins',
-      popular: true,
-    },
-    {
-      region: 'North West Coast',
-      suburbs: [
-        'Devonport', 'Burnie', 'Wynyard', 'Somerset', 'Ulverstone',
-        'Penguin', 'Turners Beach', 'Port Sorell', 'Latrobe', 'Sheffield'
-      ],
-      travelTime: '20-40 mins',
-      popular: false,
-    },
-    {
-      region: 'East Coast',
-      suburbs: [
-        'St Helens', 'Bicheno', 'Swansea', 'Triabunna', 'Orford',
-        'Sorell', 'Dodges Ferry', 'Primrose Sands', 'Carlton', 'Dunalley'
-      ],
-      travelTime: '30-60 mins',
-      popular: false,
-    },
-    {
-      region: 'West Coast',
-      suburbs: [
-        'Strahan', 'Queenstown', 'Zeehan', 'Rosebery', 'Tullah',
-        'Waratah', 'Savage River', 'Corinna', 'Trial Harbour'
-      ],
-      travelTime: '60-90 mins',
-      popular: false,
-    },
-    {
-      region: 'South East',
-      suburbs: [
-        'Huonville', 'Franklin', 'Geeveston', 'Dover', 'Southport',
-        'Cygnet', 'Woodbridge', 'Kettering', 'Margate', 'Snug'
-      ],
-      travelTime: '30-60 mins',
-      popular: false,
-    },
-  ];
+  const { content, isLoading, error } = useWebsiteContent();
+  if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
+  if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
 
-  const services = [
-    'Carpet Cleaning',
-    'End of Lease Cleaning',
-    'Office Cleaning',
-    'Deep Cleaning',
-    'Window Cleaning',
-    'Regular House Cleaning',
-  ];
+  const serviceAreas = content.serviceAreas || [];
+  const services = content.services?.map((s: any) => s.title) || [];
 
   return (
     <div>
@@ -120,7 +58,7 @@ export default function AreasPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {serviceAreas.map((area, index) => (
+            {serviceAreas.map((area: any, index: number) => (
               <div key={index} className={`bg-white rounded-lg shadow-lg p-8 border-2 ${area.popular ? 'border-blue-200 bg-blue-50' : 'border-gray-200'}`}>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-2xl font-bold text-gray-900">{area.region}</h3>
@@ -137,7 +75,7 @@ export default function AreasPage() {
                 </div>
                 
                 <div className="grid grid-cols-2 gap-2 mb-6">
-                  {area.suburbs.map((suburb, subIndex) => (
+                  {area.suburbs.map((suburb: string, subIndex: number) => (
                     <div key={subIndex} className="text-sm text-gray-700 py-1">
                       {suburb}
                     </div>
@@ -170,7 +108,7 @@ export default function AreasPage() {
               </p>
               
               <div className="grid grid-cols-1 gap-4">
-                {services.map((service, index) => (
+                {services.map((service: string, index: number) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
                     <span className="text-gray-700 font-medium">{service}</span>
