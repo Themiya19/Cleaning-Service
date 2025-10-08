@@ -58,7 +58,7 @@ export default function AboutPage() {
             <AnimatedSection animation="fadeRight">
               <ParallaxContainer speed={0.2} direction="up">
                 <img
-                  src="https://images.pexels.com/photos/4239119/pexels-photo-4239119.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src={content.about?.image || "https://images.pexels.com/photos/4239119/pexels-photo-4239119.jpeg?auto=compress&cs=tinysrgb&w=800"}
                   alt="Professional cleaning team"
                   className="rounded-lg shadow-lg w-full hover-lift hover-tilt transition-all-smooth"
                 />

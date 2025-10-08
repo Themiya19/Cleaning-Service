@@ -101,7 +101,7 @@ export default function HomePage() {
             <AnimatedSection animation="fadeRight" className="relative">
               <ParallaxContainer speed={0.2} direction="up">
                 <img
-                  src="https://images.pexels.com/photos/6197119/pexels-photo-6197119.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src={content.hero?.image || "https://images.pexels.com/photos/6197119/pexels-photo-6197119.jpeg?auto=compress&cs=tinysrgb&w=800"}
                   alt="Professional cleaning service"
                   className="rounded-lg shadow-2xl w-full hover-lift hover-tilt transition-all-smooth"
                 />
