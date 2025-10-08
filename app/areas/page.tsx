@@ -7,6 +7,8 @@ import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function AreasPage() {
   const { content, isLoading, error } = useWebsiteContent();
+  const phone = content?.company?.phone || '1300123456';
+  const companyName = content?.company?.name || 'Sparkle Clean';
   if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
   if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
 
@@ -34,11 +36,11 @@ export default function AreasPage() {
                 Check Your Area
               </Link>
               <a
-                href="tel:1300123456"
+                href={`tel:${phone}`}
                 className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition-colors flex items-center justify-center gap-2"
               >
                 <Phone className="w-5 h-5" />
-                1300 123 456
+                {phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}
               </a>
             </div>
           </div>
@@ -183,7 +185,7 @@ export default function AreasPage() {
             </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
               Whether you're in the CBD or the outer suburbs, you'll receive the same professional 
-              service and quality results that Sparkle Clean is known for.
+              service and quality results that {companyName} is known for.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
@@ -213,10 +215,10 @@ export default function AreasPage() {
                 Book Your Area
               </Link>
               <a
-                href="tel:1300123456"
+                href={`tel:${phone}`}
                 className="bg-transparent text-white px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white hover:text-blue-600 transition-colors"
               >
-                Call 1300 123 456
+                Call {phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}
               </a>
             </div>
           </div>
@@ -245,7 +247,7 @@ export default function AreasPage() {
                 Contact Us About Your Area
               </Link>
               <a
-                href="tel:1300123456"
+                href={`tel:${phone}`}
                 className="bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
               >
                 Call to Inquire

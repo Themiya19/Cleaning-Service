@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { Phone } from 'lucide-react';
+import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function FloatingCallButton() {
   const [isVisible, setIsVisible] = useState(false);
+  const { content } = useWebsiteContent();
+  const phone = content?.company?.phone || '1300123456';
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -24,7 +27,7 @@ export default function FloatingCallButton() {
       isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
     }`}>
       <a
-        href="tel:1300123456"
+        href={`tel:${phone}`}
         className="bg-gradient-to-r from-green-600 to-green-700 text-white p-4 rounded-full shadow-lg hover:from-green-700 hover:to-green-800 transition-all-smooth transform hover:scale-110 animate-float group"
         aria-label="Call Now"
       >

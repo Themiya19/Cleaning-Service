@@ -7,6 +7,9 @@ import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function ContactPage() {
   const { content, isLoading, error } = useWebsiteContent();
+  const phone = content?.company?.phone || '1300123456';
+  const email = content?.company?.email || 'info@sparkleclean.com.au';
+  const companyName = content?.company?.name || 'Sparkle Clean';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -190,8 +193,8 @@ export default function ContactPage() {
                     <Phone className="w-6 h-6 text-blue-600 mt-1" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Phone</h3>
-                      <a href="tel:1300123456" className="text-blue-600 hover:text-blue-700 text-lg">
-                        1300 123 456
+                      <a href={`tel:${phone}`} className="text-blue-600 hover:text-blue-700 text-lg">
+                        {phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}
                       </a>
                       <p className="text-sm text-gray-600">Available 7 days a week</p>
                     </div>
@@ -201,8 +204,8 @@ export default function ContactPage() {
                     <Mail className="w-6 h-6 text-blue-600 mt-1" />
                     <div>
                       <h3 className="font-semibold text-gray-900">Email</h3>
-                      <a href="mailto:info@sparkleclean.com.au" className="text-blue-600 hover:text-blue-700">
-                        info@sparkleclean.com.au
+                      <a href={`mailto:${email}`} className="text-blue-600 hover:text-blue-700">
+                        {email}
                       </a>
                       <p className="text-sm text-gray-600">We respond within 24 hours</p>
                     </div>
@@ -237,7 +240,7 @@ export default function ContactPage() {
                     Need urgent cleaning services? We're available 24/7 for emergency situations.
                   </p>
                   <a
-                    href="tel:1300123456"
+                    href={`tel:${phone}`}
                     className="bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors inline-block"
                   >
                     Call Emergency Line
@@ -246,7 +249,7 @@ export default function ContactPage() {
 
                 {/* Why Choose Us */}
                 <div className="bg-blue-50 p-6 rounded-lg">
-                  <h3 className="font-semibold text-blue-900 mb-4">Why Choose Sparkle Clean?</h3>
+                  <h3 className="font-semibold text-blue-900 mb-4">Why Choose {companyName}?</h3>
                   <ul className="space-y-2 text-blue-800">
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4" />

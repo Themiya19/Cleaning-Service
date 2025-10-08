@@ -5,6 +5,7 @@ import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function GalleryPage() {
   const { content, isLoading, error } = useWebsiteContent();
+  const phone = content?.company?.phone || '1300123456';
   if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
   if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
 
@@ -158,10 +159,10 @@ export default function GalleryPage() {
                 Get Free Quote
               </a>
               <a
-                href="tel:1300123456"
+                href={`tel:${phone}`}
                 className="bg-transparent text-white px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white hover:text-blue-600 transition-colors"
               >
-                Call 1300 123 456
+                Call {phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}
               </a>
             </div>
           </div>

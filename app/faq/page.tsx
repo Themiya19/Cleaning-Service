@@ -7,6 +7,8 @@ import { useWebsiteContent } from '@/hooks/useWebsiteContent';
 
 export default function FAQPage() {
   const { content, isLoading, error } = useWebsiteContent();
+  const phone = content?.company?.phone || '1300123456';
+  const email = content?.company?.email || 'info@sparkleclean.com.au';
   const [openItems, setOpenItems] = useState<number[]>([]);
   if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
   if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
@@ -105,8 +107,8 @@ export default function FAQPage() {
                   <span className="text-2xl">📞</span>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Call Us</h3>
-                <a href="tel:1300123456" className="text-blue-600 hover:text-blue-700 text-lg font-medium">
-                  1300 123 456
+                <a href={`tel:${phone}`} className="text-blue-600 hover:text-blue-700 text-lg font-medium">
+                  {phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}
                 </a>
                 <p className="text-sm text-gray-600 mt-1">7 days a week</p>
               </div>
@@ -116,8 +118,8 @@ export default function FAQPage() {
                   <span className="text-2xl">✉️</span>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Email Us</h3>
-                <a href="mailto:info@sparkleclean.com.au" className="text-blue-600 hover:text-blue-700 font-medium">
-                  info@sparkleclean.com.au
+                <a href={`mailto:${email}`} className="text-blue-600 hover:text-blue-700 font-medium">
+                  {email}
                 </a>
                 <p className="text-sm text-gray-600 mt-1">24 hour response</p>
               </div>
@@ -142,7 +144,7 @@ export default function FAQPage() {
                 Get Free Quote
               </a>
               <a
-                href="tel:1300123456"
+                href={`tel:${phone}`}
                 className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition-colors"
               >
                 Call Now

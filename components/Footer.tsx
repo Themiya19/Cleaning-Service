@@ -12,6 +12,7 @@ export default function Footer() {
     phone: '1300123456',
     email: 'info@sparkleclean.com.au',
     address: 'Hobart, Tasmania, Australia',
+    abn: content?.company?.abn || '12 345 678 901',
   };
   return (
     <footer className="bg-gray-900 text-white">
@@ -109,7 +110,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2024 Sparkle Clean Professional Services. All rights reserved.
+              © 2024 {company.name} {company.tagline}. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">
@@ -121,7 +122,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="mt-4 text-center">
-            <p className="text-xs text-gray-500">ABN: 12 345 678 901</p>
+            <p className="text-xs text-gray-500">ABN: {company.abn}</p>
           </div>
         </div>
       </div>

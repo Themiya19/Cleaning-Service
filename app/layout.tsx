@@ -31,6 +31,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>Sparkle Clean - Professional Cleaning Services Melbourne</title>
+        <meta name="description" content="Professional cleaning services in Melbourne. Carpet cleaning, end of lease cleaning, office cleaning, and more. Quality guaranteed with every clean." />
+        <meta name="author" content="Sparkle Clean" />
+        <meta name="publisher" content="Sparkle Clean" />
+        {/* Add other static meta tags as needed */}
+      </head>
       <body className={`${inter.className} overflow-x-hidden`}>
         <Header />
         <main className="min-h-screen relative">

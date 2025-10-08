@@ -14,6 +14,7 @@ import { getWebsiteContent } from '@/lib/websiteContent';
 
 export default function ServicesPage() {
   const { content, isLoading, error } = useWebsiteContent();
+  const phone = content?.company?.phone || '1300123456';
   if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
   if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
 
@@ -52,11 +53,11 @@ export default function ServicesPage() {
               </AnimatedCard>
               <AnimatedCard hoverScale={1.05} className="inline-block" delay={0.1}>
                   <a
-                    href={`tel:${content.company.phone}`}
+                    href={`tel:${phone}`}
                     className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition-colors flex items-center justify-center gap-2 hover-magnetic group"
                   >
                     <Phone className="w-5 h-5 transition-transform-smooth group-hover:scale-110 group-hover:rotate-12" />
-                    {content.company.phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}
+                    {phone.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3')}
                   </a>
               </AnimatedCard>
             </StaggerContainer>
@@ -205,7 +206,7 @@ export default function ServicesPage() {
                 Get Free Quote
               </Link>
               <a
-                href={`tel:${content.company.phone}`}
+                href={`tel:${phone}`}
                 className="bg-transparent text-white px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white hover:text-blue-600 transition-colors flex items-center justify-center gap-2"
               >
                 <Phone className="w-5 h-5" />
