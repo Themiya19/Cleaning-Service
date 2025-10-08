@@ -9,8 +9,8 @@ export default function TestimonialsPage() {
   if (isLoading) return <div className="py-32 text-center text-xl">Loading...</div>;
   if (error || !content) return <div className="py-32 text-center text-red-600">Failed to load content.</div>;
 
-  const testimonials = content.testimonials || [];
-  const stats = content.hero?.stats || [];
+  const testimonials = Array.isArray(content.testimonials) ? content.testimonials : [];
+  const stats = Array.isArray(content.hero?.stats) ? content.hero.stats : [];
 
   return (
     <div>
