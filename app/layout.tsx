@@ -46,7 +46,6 @@ export default function RootLayout({
           </PageTransition>
         </main>
         <Footer />
-        <FloatingCallButton />
         <CookieConsent />
       </body>
     </html>
