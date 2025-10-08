@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -22,6 +23,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [content, setContent] = useState<any>(defaultContent);
   const [isLoading, setIsLoading] = useState(true);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -137,36 +139,45 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.5, 
-                  delay: index * 0.1,
-                  ease: [0.25, 0.46, 0.45, 0.94]
-                }}
-              >
-                <Link
-                  href={item.href}
-                  className="text-gray-700 hover:text-blue-600 font-medium transition-all-smooth relative group py-2 block"
+            {navItems.map((item, index) => {
+              const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+              return (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: index * 0.1,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
                 >
-                  <motion.span
-                    whileHover={{ y: -2 }}
-                    transition={{ duration: 0.2 }}
+                  <Link
+                    href={item.href}
+                    className={`font-medium transition-all-smooth relative group py-2 block focus:outline-none ${
+                      isActive
+                        ? 'text-blue-700 font-semibold'
+                        : 'text-gray-700 hover:text-blue-600'
+                    }`}
+                    aria-current={isActive ? 'page' : undefined}
                   >
-                    {item.label}
-                  </motion.span>
-                  <motion.span 
-                    className="absolute bottom-0 left-0 h-0.5 bg-blue-600"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Link>
-              </motion.div>
-            ))}
+                    <motion.span
+                      whileHover={{ y: -2 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {item.label}
+                    </motion.span>
+                    {/* Active underline */}
+                    <motion.span
+                      className="absolute bottom-0 left-0 h-0.5 bg-blue-600 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: isActive ? '100%' : 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Link>
+                </motion.div>
+              );
+            })}
           </nav>
 
           {/* Contact Info & CTA */}
@@ -255,31 +266,39 @@ export default function Header() {
                 transition={{ duration: 0.3, delay: 0.1 }}
               >
                 <nav className="flex flex-col space-y-4">
-                  {navItems.map((item, index) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ 
-                        duration: 0.3, 
-                        delay: index * 0.1,
-                        ease: [0.25, 0.46, 0.45, 0.94]
-                      }}
-                    >
-                      <Link
-                        href={item.href}
-                        className="text-gray-700 hover:text-blue-600 font-medium py-2 transition-all-smooth hover:pl-2 block"
-                        onClick={() => setIsMenuOpen(false)}
+                  {navItems.map((item, index) => {
+                    const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+                    return (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ 
+                          duration: 0.3, 
+                          delay: index * 0.1,
+                          ease: [0.25, 0.46, 0.45, 0.94]
+                        }}
                       >
-                        <motion.span
-                          whileHover={{ x: 8 }}
-                          transition={{ duration: 0.2 }}
+                        <Link
+                          href={item.href}
+                          className={`font-medium py-2 transition-all-smooth block focus:outline-none ${
+                            isActive
+                              ? 'text-blue-700 font-semibold pl-2'
+                              : 'text-gray-700 hover:text-blue-600 hover:pl-2'
+                          }`}
+                          aria-current={isActive ? 'page' : undefined}
+                          onClick={() => setIsMenuOpen(false)}
                         >
-                          {item.label}
-                        </motion.span>
-                      </Link>
-                    </motion.div>
-                  ))}
+                          <motion.span
+                            whileHover={{ x: 8 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {item.label}
+                          </motion.span>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                   <motion.div 
                     className="pt-4 border-t border-gray-200"
                     initial={{ opacity: 0 }}
